@@ -4,6 +4,7 @@ add_executable(SingleRespPrinciple SingleRespPrinciple.cpp)
 add_executable(OpenClosedPrinciple OpenClosedPrinciple.cpp)
 add_executable(LiskovSubstitutionPrinciple LiskovSubstitutionPrinciple.cpp)
 add_executable(InterfaceSegregationPrinciple InterfaceSegregationPrinciple.cpp)
+add_executable(DependencyInversionPrinciple DependencyInversionPrinciple.cpp)
 
 # Link the pthread library to your executable
 target_link_libraries(SingleRespPrinciple boost_system)
