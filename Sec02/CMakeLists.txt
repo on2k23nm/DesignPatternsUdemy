@@ -1,5 +1,5 @@
 # Add your source files to the project
-add_executable(test test.cpp)
+add_executable(test_s02 test.cpp)
 add_executable(SingleRespPrinciple SingleRespPrinciple.cpp)
 add_executable(OpenClosedPrinciple OpenClosedPrinciple.cpp)
 add_executable(LiskovSubstitutionPrinciple LiskovSubstitutionPrinciple.cpp)
