@@ -21,3 +21,4 @@ set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0 -g")
 
 add_subdirectory(Sec02)
 add_subdirectory(Sec03)
+add_subdirectory(Misc)
