@@ -135,3 +135,17 @@ int main(int argc, char *argv[])
 
     return 0;
 }
+
+// OP:
+// MyString::MyString(const char*):<0x7ffe237d2bc8>
+// MyString::MyString(const char*):<0x7ffe237d2bd0>
+// MyString& MyString::operator=(MyString&&):<0x7ffe237d2bc8>
+// const char* MyString::getStr() const:<0x7ffe237d2bd0>
+// void MyString::setStr(const char*):<0x7ffe237d2bd0>
+// MyString::~MyString():<0x7ffe237d2bd0>
+// MyString::MyString(const char*):<0x7ffe237d2bd0>
+// MyString& MyString::operator=(MyString&&):<0x7ffe237d2bc8>
+// const char* MyString::getStr() const:<0x7ffe237d2bd0>
+// void MyString::setStr(const char*):<0x7ffe237d2bd0>
+// MyString::~MyString():<0x7ffe237d2bd0>
+// MyString::~MyString():<0x7ffe237d2bc8>
