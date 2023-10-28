@@ -6,6 +6,7 @@ using namespace std;
 class MyString
 {
         friend MyString operator+(const MyString& lhs, const MyString& rhs);
+        friend bool operator==(const MyString& lhs, const MyString& rhs);
         char *str; 
     public:
         // ctor
@@ -211,6 +212,14 @@ MyString operator+(const MyString& lhs, const MyString& rhs)
     return MyString{newStr};
 }
 
+
+bool operator==(const MyString& lhs, const MyString& rhs)
+{
+    if (strcmp(lhs.getStr(), rhs.getStr()) == 0)
+        return true;
+    return false;
+}
+
 int main(int argc, char *argv[])
 {
 
@@ -218,6 +227,16 @@ int main(int argc, char *argv[])
     // MyString res = MyString{"Larry"} + "Moe"; // Works !
     res.display();
 
+    if ("Larry" == MyString("Larry"))
+        cout << "Both are equal !" << endl;
+    else
+        cout << "Both are not equal" << endl;
+    
+    if ("Tom" == MyString("Larry"))
+        cout << "Both are equal !" << endl;
+    else
+        cout << "Both are not equal" << endl;
+    
     return 0;
 }
 
@@ -231,3 +250,11 @@ int main(int argc, char *argv[])
 // MyString::~MyString():<0x7ffc80b34be8>
 // (MoeLarry)
 // MyString::~MyString():<0x7ffc80b34be0>
+
+// OP: Note that the destructor getting called before "Both are not equal",
+// objects created to if block and so destroyed when if block exists.
+// MyString::MyString(const char*):<0x7ffcc19837a8> : str:(Larry)
+// MyString::MyString(const char*):<0x7ffcc19837b0> : str:(Tom)
+// MyString::~MyString():<0x7ffcc19837b0>
+// MyString::~MyString():<0x7ffcc19837a8>
+// Both are not equal
