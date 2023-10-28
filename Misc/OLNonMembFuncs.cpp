@@ -60,7 +60,7 @@ const char* MyString::getStr() const
 // Executes when MyString a; -- there is no construction information here.
 MyString::MyString(): str{nullptr}
 {
-    cout << __PRETTY_FUNCTION__ << ":<" << this << ">" << endl;
+    //cout << __PRETTY_FUNCTION__ << ":<" << this << ">" << endl;
     str = new char[1];
     *str = '\0';
 }
@@ -79,12 +79,12 @@ MyString::MyString(const char* s)
         str = new char[len + 1];
         strncpy(str, s, len + 1);
     }
-    cout << __PRETTY_FUNCTION__ << ":<" << this << "> : str:(" << str << ")" << endl;
+    //cout << __PRETTY_FUNCTION__ << ":<" << this << "> : str:(" << str << ")" << endl;
 }
 
 MyString::MyString(const MyString &src)
 {
-    cout << __PRETTY_FUNCTION__ << ":<" << this << ">" << endl;
+    //cout << __PRETTY_FUNCTION__ << ":<" << this << ">" << endl;
     size_t len = 0;
     // allocate space for the LHS MyString
     len = src.getLength();      // 0 or non-zero
@@ -95,7 +95,7 @@ MyString::MyString(const MyString &src)
 
 MyString::~MyString()
 {
-    cout << __PRETTY_FUNCTION__ << ":<" << this << ">" << endl;
+    //cout << __PRETTY_FUNCTION__ << ":<" << this << ">" << endl;
     delete [] str;
     str = nullptr;
 }
@@ -104,7 +104,7 @@ MyString::~MyString()
 // Type& Type::operator=(const Type &rhs)
 MyString& MyString::operator=(const MyString& rhs)
 {
-    cout << __PRETTY_FUNCTION__ << ":<" << this << ">" << endl;
+    //cout << __PRETTY_FUNCTION__ << ":<" << this << ">" << endl;
     
     // Check self assignment
     if (this == &rhs)                       // p1 = p1 
@@ -122,7 +122,7 @@ MyString& MyString::operator=(const MyString& rhs)
 // Type& Type::operator=(Type &&rhs)
 MyString& MyString::operator=(MyString&& rhs)
 {
-    cout << __PRETTY_FUNCTION__ << ":<" << this << ">" << endl;
+    //cout << __PRETTY_FUNCTION__ << ":<" << this << ">" << endl;
     
     // Check self assignment
     if (this == &rhs)           // p1 = p1 
@@ -140,7 +140,7 @@ MyString& MyString::operator=(MyString&& rhs)
 // General form - Type Type::operator-()const 
 MyString MyString::operator-() const
 {
-    cout << __PRETTY_FUNCTION__ << ":<" << this << ">" << endl;
+    //cout << __PRETTY_FUNCTION__ << ":<" << this << ">" << endl;
     // Allocate space for the new string
     size_t len = strlen(str);
     char *scopy = new char[len + 1];
@@ -168,7 +168,7 @@ MyString MyString::operator-() const
 
 bool MyString::operator==(const MyString& rhs)
 {
-    cout << __PRETTY_FUNCTION__ << ":<" << this << ">" << endl;
+    //cout << __PRETTY_FUNCTION__ << ":<" << this << ">" << endl;
     if (strcmp(str, rhs.getStr()) == 0)
         return true;
     else
@@ -177,7 +177,7 @@ bool MyString::operator==(const MyString& rhs)
 
 MyString MyString::operator+(const MyString& rhs)
 {
-    cout << __PRETTY_FUNCTION__ << ":<" << this << ">" << endl;
+    //cout << __PRETTY_FUNCTION__ << ":<" << this << ">" << endl;
     size_t len1, len2; 
 
     len1 = getLength(); 
@@ -194,7 +194,7 @@ MyString MyString::operator+(const MyString& rhs)
 
 MyString operator+(const MyString& lhs, const MyString& rhs)
 {
-    cout << __PRETTY_FUNCTION__ << endl;
+    //cout << __PRETTY_FUNCTION__ << endl;
 
     size_t len1 = 0, len2 = 0, len3 = 0; 
 
@@ -220,22 +220,67 @@ bool operator==(const MyString& lhs, const MyString& rhs)
     return false;
 }
 
+istream& operator>>(istream& is, MyString& rhs)
+{
+    size_t inpChunkSize{256};
+    size_t allocCap{256};
+    size_t totReadBytes{0};
+
+    char *tmpHoldingBuff{nullptr};
+
+
+    char *input = new char[allocCap];
+
+    while(!is.eof())
+    {
+        is.read(input + totReadBytes, inpChunkSize);
+        totReadBytes += cin.gcount();
+
+        // if 256 bytes have been used up, then new chunk has to be allocated. 
+        if (is.gcount() == inpChunkSize)
+        {
+            allocCap += inpChunkSize;
+
+            tmpHoldingBuff = new char[allocCap];
+            strncpy(tmpHoldingBuff, input, totReadBytes);
+            
+            delete [] input;
+            
+            input = tmpHoldingBuff;
+        }
+    }
+    
+    is.clear();
+    
+    input[totReadBytes] = '\0';
+
+    cout << "totReadBytes=(" << totReadBytes << ")" << endl;
+    cout << "Len=(" << strlen(input) << ")" << endl;
+    rhs = MyString(input);
+    rhs.display();
+
+    return is;
+}
+
 int main(int argc, char *argv[])
 {
 
-    MyString res = "Moe" + MyString{"Larry"};
-    // MyString res = MyString{"Larry"} + "Moe"; // Works !
-    res.display();
+    // MyString res = "Moe" + MyString{"Larry"};
+    // // MyString res = MyString{"Larry"} + "Moe"; // Works !
+    // res.display();
 
-    if ("Larry" == MyString("Larry"))
-        cout << "Both are equal !" << endl;
-    else
-        cout << "Both are not equal" << endl;
+    // if ("Larry" == MyString("Larry"))
+    //     cout << "Both are equal !" << endl;
+    // else
+    //     cout << "Both are not equal" << endl;
     
-    if ("Tom" == MyString("Larry"))
-        cout << "Both are equal !" << endl;
-    else
-        cout << "Both are not equal" << endl;
+    // if ("Tom" == MyString("Larry"))
+    //     cout << "Both are equal !" << endl;
+    // else
+    //     cout << "Both are not equal" << endl;
+    
+    MyString s1, s2;
+    cin >> s1 >> s2;
     
     return 0;
 }
