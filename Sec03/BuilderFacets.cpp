@@ -1,3 +1,4 @@
+//BuilderFacets.cpp
 #include <iostream>
 
 using namespace std;
@@ -12,11 +13,15 @@ using namespace std;
 
 #include "Person.h"
 #include "PersonBuilder.h"
+#include "PersonAddrBuilder.h"
+#include "PersonJobBuilder.h"
 
 int main(int argc, char *argv[])
 {
     // Goal of our execise is to write somethign like the following 
     Person p = Person::create().lives().at("123 London Road").withPostalCode("SW1 1GB").in("London").works().at("PragmaSoft").as("Software Engineer").earning(150000);
+
+    cout << p << endl;
 
     return 0;
 }

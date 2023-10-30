@@ -1,5 +1,4 @@
-// This is my PersonBuilder.cpp file which has PersonBuilder()
-
+// PersonBuilder.cpp
 #include "PersonBuilder.h"
 #include "PersonAddrBuilder.h"
 #include "PersonJobBuilder.h"
@@ -19,7 +18,7 @@ PersonJobBuilder PersonBuilderBase::works() const
     return PersonJobBuilder{person};
 }
 
-PersonBuilder::PersonBuilder():PersonBuilderBase(p) // Note : p is the actual object which is getting created
+PersonBuilder::PersonBuilder(): PersonBuilderBase(p) // Note : p is the actual object which is getting created
 {
-    // do nothing here for now
+    // Do nothing 
 }

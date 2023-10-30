@@ -4,11 +4,17 @@ add_executable(LifeWithoutBuilders LifeWithoutBuilders.cpp)
 add_executable(ForceBuilders ForceBuilders.cpp)
 add_executable(GroovyStyleBuilder GroovyStyleBuilder.cpp)
 
+# List all your source files
+set(SOURCE_FILES
+    Person.cpp
+    PersonBuilder.cpp
+    #BuilderFacets.cpp
+    # ... other source files ...
+)
 
+# Create an object library for the common code
+add_library(Common OBJECT ${SOURCE_FILES})
 
-add_library(PersonBuilder.o OBJECT PersonBuilder.cpp)
-add_library(Person.o OBJECT Person.cpp)
-add_library(BuilderFacets.o OBJECT BuilderFacets.cpp)
-
-# add_executable(BuilderFacets BuilderFacets.o)
-# target_link_libraries(MyExecutable test_object)
+# Create an executable for BuilderFacets and link it with the Common library
+add_executable(BuilderFacets BuilderFacets.cpp)
+target_link_libraries(BuilderFacets Common)

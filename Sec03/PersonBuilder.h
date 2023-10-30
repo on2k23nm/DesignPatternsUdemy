@@ -1,4 +1,4 @@
-// p is defined in class definitiion for PersonBuilder
+// PersonBuilder.h
 #ifndef PERSONBUILDER_H
 #define PERSONBUILDER_H
 

@@ -1,7 +1,9 @@
+// Person.h
 #ifndef PERSON_H
 #define PERSON_H
 
 #include <string>
+#include <ostream>
 
 class PersonBuilder; 
 class PersonJobBuilder;
@@ -12,7 +14,8 @@ class Person
     friend class PersonBuilder;
     friend class PersonJobBuilder;
     friend class PersonAddrBuilder; 
-    
+    friend std::ostream& operator<<(std::ostream& os, const Person& p);
+
     // Address info
     std::string streetAddr, postalCode, city;
     
@@ -29,8 +32,6 @@ class Person
 public:
     // Person providing static method for initilizing the builder
     static PersonBuilder create(); 
-    
-
 };
 
 #endif // PERSON_H
