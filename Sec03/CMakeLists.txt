@@ -5,5 +5,10 @@ add_executable(ForceBuilders ForceBuilders.cpp)
 add_executable(GroovyStyleBuilder GroovyStyleBuilder.cpp)
 
 
-# get_target_property(PTHREAD_LIBRARIES LINK_LIBRARIES)
-# message(STATUS "Pthread library in use: ${PTHREAD_LIBRARIES}")
+
+add_library(PersonBuilder.o OBJECT PersonBuilder.cpp)
+add_library(Person.o OBJECT Person.cpp)
+add_library(BuilderFacets.o OBJECT BuilderFacets.cpp)
+
+# add_executable(BuilderFacets BuilderFacets.o)
+# target_link_libraries(MyExecutable test_object)
