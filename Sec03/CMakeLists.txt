@@ -8,8 +8,6 @@ add_executable(GroovyStyleBuilder GroovyStyleBuilder.cpp)
 set(SOURCE_FILES
     Person.cpp
     PersonBuilder.cpp
-    #BuilderFacets.cpp
-    # ... other source files ...
 )
 
 # Create an object library for the common code
