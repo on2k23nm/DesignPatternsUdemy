@@ -17,11 +17,3 @@ std::ostream& operator<<(std::ostream& os, const Person& p)
 
     return os;
 }
-
-// Output :
-// $ ./Sec03/BuilderFacets
-// Street Address :123 London Road
-// Postal Code    :SW1 1GB
-// Company Name   :PragmaSoft
-// Position       :Software Engineer
-// Annual Income  :150000
